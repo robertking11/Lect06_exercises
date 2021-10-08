@@ -1,14 +1,31 @@
 #!/bin/bash
 
+# reading in the BLAST file
 while read query_accver subject_accver percent_identity alignment_length mismatches gap_opens q_start q_end s_start s_end evalue bit_score
 do
+
+# question 1 - listing the subject accession
 echo "$subject_accver" > subject_accesions.txt
+
+# question 2 - listing the alignment length and percentage identity
 echo "$alignment_length		$percent_identity" > alignment_length_and_percent_identity.txt
+
+# question 3 - showing those with over 20 mismatches
 if test $mismatches -gt 20
 then 
 echo "$query_accver $subject_accver $percent_identity $alignment_length $mismatches $gap_opens $q_start $q_end $s_start $s_end $evalue $bit_score" > over_20_mismatches.txt
 else
 continue
 fi
+
+# question 4 - ones shorter than 100 amino acids and with more than 20 mismatches
+
+if test $mismatches -gt 20 && test 
+then
+echo "$query_accver $subject_accver $percent_identity $alignment_length $mismatches $gap_opens $q_start $q_end $s_start $s_end $evalue $bit_score" 
+else
+continue
+fi
+
 done < blastoutput2.out
 
